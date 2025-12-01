@@ -72,15 +72,30 @@ function CountryInfo({ country }) {
         </h2>
         <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full" />
       </div>
-      <p className="text-base text-slate-700 mb-8 leading-relaxed flex-grow">
+      <p className="text-base text-slate-700 mb-6 leading-relaxed">
         {country.shortDescription}
       </p>
-      <button
-        onClick={() => navigate(`/countries/${country.id}`)}
-        className="w-full px-6 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-      >
-        View full history for {country.name} →
-      </button>
+      {country.image && (
+        <div className="mb-6 rounded-lg overflow-hidden shadow-md">
+          <img
+            src={country.image}
+            alt={`${country.name} - LDS Church history`}
+            className="w-full h-auto object-cover"
+            onError={(e) => {
+              // Hide image if it fails to load
+              e.target.style.display = 'none';
+            }}
+          />
+        </div>
+      )}
+      <div className="mt-auto">
+        <button
+          onClick={() => navigate(`/countries/${country.id}`)}
+          className="w-full px-6 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+        >
+          View full history for {country.name} →
+        </button>
+      </div>
     </div>
   )
 }
